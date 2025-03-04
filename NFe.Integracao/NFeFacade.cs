@@ -186,6 +186,9 @@ namespace NFe.Integracao
             ConfiguracaoServico.Instancia.VersaoNfeRetRecepcao = versaoNFe;
             ConfiguracaoServico.Instancia.VersaoNfeStatusServico = versaoNFe;
             ConfiguracaoServico.Instancia.VersaoRecepcaoEventoCceCancelamento = versaoNFe;
+            ConfiguracaoServico.Instancia.VersaoRecepcaoEventoInsucessoEntrega = versaoNFe;
+            ConfiguracaoServico.Instancia.VersaoRecepcaoEventoComprovanteEntrega = versaoNFe;
+            ConfiguracaoServico.Instancia.VersaoRecepcaoEventoConciliacaoFinanceira = versaoNFe;
 
             #endregion
 
@@ -223,7 +226,7 @@ namespace NFe.Integracao
             var arquivo = nfe.ObterXmlString();
 
             var configuracaoDanfeNFCe = new ConfiguracaoDanfeNfce(Danfe.Base.NfceDetalheVendaNormal.UmaLinha, Danfe.Base.NfceDetalheVendaContigencia.UmaLinha);
-            DanfeNativoNfce impr = new DanfeNativoNfce(arquivo, configuracaoDanfeNFCe, idToken, csc);
+            DanfeNativoNfce impr = new DanfeNativoNfce(arquivo, configuracaoDanfeNFCe.VersaoQrCode, configuracaoDanfeNFCe.Logomarca, idToken, csc);
 
             impr.GerarJPEG(pathJpeg);
         }

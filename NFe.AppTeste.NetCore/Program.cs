@@ -1,7 +1,7 @@
 ﻿using DFe.Classes.Flags;
 using DFe.Utils;
 using DFe.Utils.Assinatura;
-using DFe.Utils.Standard;
+using DFe.Utils;
 using NFe.Classes;
 using NFe.Classes.Informacoes;
 using NFe.Classes.Informacoes.Cobranca;
@@ -150,7 +150,7 @@ namespace NFe.AppTeste.NetCore
                 string password = Console.ReadLine();
 
                 Console.Clear();
-                var cert = CertificadoDigitaoUtil.ObterDoCaminho(caminho, password);
+                var cert = CertificadoDigitalUtils.ObterDoCaminho(caminho, password);
                 _configuracoes.CfgServico.Certificado.Serial = cert.SerialNumber;
                 Console.WriteLine("Certificado encontrado e carregado...");
                 Console.WriteLine("Issuer: " + cert.IssuerName);
@@ -698,7 +698,7 @@ namespace NFe.AppTeste.NetCore
 
                         //Caso você resolva utilizar método ObterIcmsBasico(), comente esta proxima linha
                         TipoICMS =
-                            crt == CRT.SimplesNacional
+                            crt == CRT.SimplesNacional || crt == CRT.SimplesNacionalMei
                                 ? InformarCSOSN(Csosnicms.Csosn102)
                                 : InformarICMS(Csticms.Cst00, VersaoServico.Versao310)
                     },
@@ -1033,8 +1033,8 @@ namespace NFe.AppTeste.NetCore
                 {
                     detPag = new List<detPag>
                     {
-                        new detPag {tPag = FormaPagamento.fpCreditoLoja, vPag = valorPagto},
-                        new detPag {tPag = FormaPagamento.fpCreditoLoja, vPag = icmsTot.vNF - valorPagto}
+                        new detPag {tPag = FormaPagamento.fpCreditoEmLoja, vPag = valorPagto},
+                        new detPag {tPag = FormaPagamento.fpCreditoEmLoja, vPag = icmsTot.vNF - valorPagto}
                     }
                 }
             };
